@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 export interface User{
   username: string,
@@ -11,7 +11,7 @@ export interface User{
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
