@@ -1,46 +1,61 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {User} from "../components/sign-in/sign-in.component";
-import {User as User2}  from "../components/account/account.component";
-import {Observable} from "rxjs";
-import {NewUser} from "../components/sign-up/sign-up.component";
+import {Observable, tap} from "rxjs";
+// import {Token} from "@angular/compiler";
+import {User} from "../models";
+import {Token} from "../models";
 
-const base_url = "http://127.0.0.1:8000"
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': 'JWT ' + localStorage.getItem('token')
-    })
-  };
-  constructor(private http: HttpClient, private router: Router) { }
-  login(user: User): Observable<{token: string}>{
-    return this.http.post<{token:string}>(`${base_url}/login/`, user)
-  }
-  register(user: NewUser){
-    return this.http.post(`${base_url}/registration/`, user).subscribe(resp=>{
-      this.router.navigate(['../login'])
-    }, error => {
-    })
-  }
-  logout(){
-    localStorage.removeItem('token');
+
+  private readonly TOKEN_KEY = 'myapp-token';
+  private apiUrl = 'http://localhost:8000/profile/';
+
+
+
+  // private logoutUrl = 'http://localhost:8000/profile/logout/';
+
+  constructor(private http: HttpClient) {
   }
 
-  getUser(): Observable<User2>{
-    return this.http.get<User2>(`${base_url}/user/`, this.httpOptions)
-  }
-  getToken() {
-    // Получить токен из localStorage
-    return localStorage.getItem('token');
+  login(username: string, password: string): Observable<Token> {
+    const data = {username, password};
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    // const token = this.getToken();
+    // console.log('Authorization: ', `Bearer ${token}`);
+
+    return this.http.post<Token>(`${this.apiUrl}login/`, data, httpOptions).pipe(
+      tap((response: Token) => {
+        localStorage.setItem(this.TOKEN_KEY, response.access);
+      })
+    );
   }
 
-  isLoggedIn() {
-    // Проверить наличие токена в localStorage
-    const token = this.getToken();
-    return token != null;
+  getCurrentUser(): Observable<User> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.getToken()}`
+    });
+
+    return this.http.get<User>(`${this.apiUrl}`, {headers});
+  }
+
+  logout(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+  }
+
+  isAuthenticated(): boolean {
+    return localStorage.getItem(this.TOKEN_KEY) !== null;
+  }
+
+  getToken(): string {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    return token ? token : '';
   }
 }

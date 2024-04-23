@@ -1,39 +1,18 @@
 import { Component } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {Router, RouterLink} from "@angular/router";
-
-export interface User{
-  username: string,
-  password: string
-}
-
+import {Router} from "@angular/router";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [RouterLink],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css'
 })
-
-export class SignINComponent {
-  username: string;
-  password: string;
-  invalidData: boolean;
-  constructor(private authService: AuthService, private router: Router) {
-    this.password = "";
-    this.username = "";
-    this.invalidData = false;
-  }
-
-  login(){
-    let user = {
-      username: this.username,
-      password: this.password
-    }
-    this.authService.login(user).subscribe(result => {
-      localStorage.setItem('token', result.token);
-      this.router.navigate(['../account']);
-    })
-  }
+export class SignInComponent {
+  username = '';
+  password = '';
 }

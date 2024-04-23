@@ -14,4 +14,17 @@ export interface Car{
   liked: boolean
 }
 
+export interface User{
+  id: number,
+  name: string,
+}
+
+export interface Token {
+  access: string;
+  refresh: string;
+}
+
+
+
+
 

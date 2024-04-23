@@ -1,31 +1,18 @@
 import { Component } from '@angular/core';
-import {AuthService} from "../../services/auth.service";
-export interface NewUser{
-  first_name: string,
-  last_name: string,
-  username: string,
-  number: string,
-  password: string
-}
+import {FormsModule} from "@angular/forms";
+import {Router} from "@angular/router";
+import {RegisterService} from "../../services/register.service";
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [],
+  imports: [
+    FormsModule
+  ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css'
 })
-
-
-export class SignUPComponent {
-  user: NewUser;
-  passError: boolean;
-  constructor(private authService: AuthService) {
-    this.user = {first_name: "", last_name:"", username: "", number: "",password: ""};
-    this.passError = false;
-  }
-  register(){
-    console.log(this.user)
-    this.authService.register(this.user);
-  }
+export class SignUpComponent {
+  username = '';
+  password = '';
 }

@@ -1,1 +1,6 @@
-<p>sign-in works!</p>
+<form class="form">
+  <p class="heading">Вход</p>
+  <input class="input" type="text"  placeholder="Имя пользователя" [(ngModel)]="username" name="username"  required >
+  <input class="input" type="password" [(ngModel)]="password"  name="password" placeholder="Пароль"  required>
+  <button type="submit" class="btn">Войти</button>
+</form>
