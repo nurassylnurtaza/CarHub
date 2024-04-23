@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {User} from "../../models";
 import {HttpClient} from "@angular/common/http";
 import {NgOptimizedImage} from "@angular/common";
+import {User} from "../../User";
 
 @Component({
   selector: 'app-account',
@@ -13,11 +13,9 @@ import {NgOptimizedImage} from "@angular/common";
   styleUrl: './account.component.css'
 })
 export class AccountComponent {
-  user: User;
-  constructor(private http: HttpClient) {
-    this.user = {
-      id: 0,
-      name: 'null',
-    }
+  currentUser: User = {
+    id: 0,
+    user: '',
+    image: ''
   }
 }

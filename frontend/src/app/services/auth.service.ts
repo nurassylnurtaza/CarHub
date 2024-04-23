@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, tap} from "rxjs";
-// import {Token} from "@angular/compiler";
-import {User} from "../models";
-import {Token} from "../models";
-
+import {User} from "../User";
+import {Token} from "../Token"
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
   private readonly TOKEN_KEY = 'myapp-token';
-  private apiUrl = 'http://localhost:8000/profile/';
+  private apiUrl = 'http://localhost:8000/account/';
 
 
 
@@ -58,4 +56,5 @@ export class AuthService {
     const token = localStorage.getItem(this.TOKEN_KEY);
     return token ? token : '';
   }
+
 }

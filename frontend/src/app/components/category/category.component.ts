@@ -39,15 +39,8 @@ export class CategoryComponent implements OnInit{
       this.Cars = cars;
     });
   }
-  updateCar(car: Car){
-    car.liked = !car.liked;
-    this.carService.likeAction(car)
-  }
-  likeClicked(car: Car){
 
-    this.updateCar(car)
 
-  }
   categoryIDtoString(){
     return this.categoryID.toString()
   }

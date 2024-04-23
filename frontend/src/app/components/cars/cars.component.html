@@ -1,18 +1,18 @@
-<h1>Car Information</h1>
-<table>
-  <thead>
-  <tr>
-    <th class = "th">Make</th>
-    <th class = "th">Model</th>
-    <th class = "th">Year</th>
-    <th class = "th">Color</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let car of carData">
-    <td class = "th">{{ car.model }}</td>
-    <td class = "th">{{ car.year }}</td>
-    <td class = "th">{{ car.color }}</td>
-  </tr>
-  </tbody>
-</table>
+
+
+
+<div class="recipe-filter">
+  <button class="btn" (click)="getAllCars()">All Recipes</button>
+  <button class="btn" *ngFor="let category of categories" (click)="onCategoryClick(category.id)">{{category.name}}</button>
+</div>
+
+
+<div class="cars-list">
+  <div *ngFor="let car of cars" class="recipe-card">
+
+    <img [src]="car.imgURL" alt="Recipe Image">
+
+    <h3>{{ car.brand }} {{car.model}}</h3>
+    <a class="btn recipe-card-btn" [routerLink]="['/detail', car.id]">View Car</a>
+  </div>
+</div>

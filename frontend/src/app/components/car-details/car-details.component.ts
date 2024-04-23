@@ -20,6 +20,8 @@ export class CarDetailsComponent {
         model: 'null',
         brand: 'null',
         description:'null',
+        year: 0,
+        color: 'null',
         category: 0,
         price:0,
         imgURL: 'null',
