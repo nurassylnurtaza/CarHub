@@ -33,4 +33,12 @@ export class CarService {
 
     return this.http.get<Car[]>(`${this.apiUrl}/cars/`, {headers});
   }
+  getCarsByCategory(categoryId: number): Observable<Car[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`
+    });
+    // const url = 'http://localhost:8000/category/?category=${categoryId}'
+    return this.http.get<Car[]>(`${this.apiUrl}/category/${categoryId}`, {headers});
+    // return this.http.get<Recipe[]>(url, {headers});
+  }
 }

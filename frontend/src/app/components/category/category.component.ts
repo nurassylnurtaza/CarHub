@@ -3,46 +3,50 @@ import {Car} from "../../models";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {CategoryService} from "../../services/category.service";
 import {CarService} from "../../services/car.service";
+import {NgForOf} from "@angular/common";
+import {Cars} from "../../fake_db";
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
-export class CategoryComponent implements OnInit{
-  @Input()
-  categoryID: number;
-  Cars: Car[];
-
-  constructor(private route: ActivatedRoute, private categoryService: CategoryService, private carService: CarService, private router: Router) {
-    this.categoryID = 0;
-    this.Cars = [];
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.getCategoryCars()
-      }
-    });
-  }
-  ngOnInit() {
-    this.route.paramMap.subscribe((params)=> {
-      let _id = params.get('id');
-      if (_id) {
-        this.categoryID = +_id;
-      }
-    });
-    this.getCategoryCars()
-  }
-  getCategoryCars(){
-    this.categoryService.getCategoryCars(this.categoryID).subscribe((cars) => {
-      this.Cars = cars;
-    });
-  }
+export class CategoryComponent {
+  Cars: Car[] = [
+    {
+      id:  1,
+      model: `model ${1}`,
+      brand:`brand ${ 1}`,
+      year: 1952,
+      color: 'black',
+      category: 1,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consectetur consequatur, eaque',
+      price: 150000,
+      imgURL: '',
+      liked: true
+    }
+  ];
 
 
-  categoryIDtoString(){
-    return this.categoryID.toString()
-  }
-
+constructor(private carService: CarService, private route: ActivatedRoute) { }
+  categoryId: number = 0;
+  // ngOnInit() {
+  //   const categoryIdString = this.route.snapshot.paramMap.get('id');
+  //   this.categoryId = categoryIdString ? + categoryIdString : 0;
+  //   this.getCarsForCategory();
+  // }
+  // getCarsForCategory(): void{
+  //   this.carService.getCarsByCategory(this.categoryId).subscribe(
+  //     cars => {
+  //       this.cars = cars;
+  //     },
+  //     error => {
+  //       console.error('Failed to get Cars: ', error);
+  //     }
+  //   )
+  // }
 }

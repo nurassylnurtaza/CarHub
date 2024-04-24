@@ -118,7 +118,7 @@
   color: var(--color2);
 }
 
-.recipes-list {
+.cars-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
