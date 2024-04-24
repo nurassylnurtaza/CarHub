@@ -14,5 +14,6 @@ export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'cars' , component: CarsComponent},
   {path: 'account' ,component: AccountComponent},
-  {path: 'category', component: CategoryComponent}
+  {path: 'category', component: CategoryComponent},
+  {path: 'cars/:id ' , component: CarDetailsComponent}
 ];

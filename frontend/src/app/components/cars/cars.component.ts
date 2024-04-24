@@ -15,7 +15,7 @@ import {Router, RouterLink} from "@angular/router";
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.css'
 })
-export class CarsComponent {
+export class CarsComponent implements OnInit{
   cars: Car[] = [
     {
       id:  1,
@@ -30,40 +30,49 @@ export class CarsComponent {
       liked: true
     },
   ];
-  categories: Category[] = []
+  categories: Category[] = [
+    {
+      id: 1,
+      name: "SUV"
+    },
+    {
+      id: 2,
+      name: "sedan"
+    }
+  ];
 
   constructor(private carService: CarService, private route: Router) {
   }
-  //
-  // ngOnInit() {
-  //   this.carService.getCars().subscribe((cars) => {
-  //     this.cars = cars;
-  //   });
-  //   this.getCategories()
-  // }
-  //
-  // getCategories() {
-  //   this.carService.getCategories().subscribe(
-  //     (categories: Category[]) => {
-  //       this.categories = categories;
-  //     },
-  //     error => {
-  //       console.error('Failed to get categories: ', error);
-  //     }
-  //   )
-  // }
-  //
-  // onCategoryClick(categoryId: number): void {
-  //   this.route.navigate(['/category', categoryId]);
-  // }
-  // getAllCars(): void {
-  //   this.carService.getAllCars().subscribe(
-  //     (recipes: Car[]) => {
-  //       this.cars = recipes;
-  //     },
-  //     error => {
-  //       console.error('Failed to get all recipes: ', error);
-  //     }
-  //   )
-  // }
+
+  ngOnInit() {
+    this.carService.getCars().subscribe((cars) => {
+      this.cars = cars;
+    });
+    this.getCategories()
+  }
+
+  getCategories() {
+    this.carService.getCategories().subscribe(
+      (categories: Category[]) => {
+        this.categories = categories;
+      },
+      error => {
+        console.error('Failed to get categories: ', error);
+      }
+    )
+  }
+
+  onCategoryClick(categoryId: number): void {
+    this.route.navigate(['/category', categoryId]);
+  }
+  getAllCars(): void {
+    this.carService.getAllCars().subscribe(
+      (recipes: Car[]) => {
+        this.cars = recipes;
+      },
+      error => {
+        console.error('Failed to get all recipes: ', error);
+      }
+    )
+  }
 }

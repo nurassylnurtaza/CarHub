@@ -18,22 +18,22 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  login(username: string, password: string): Observable<Token> {
-    const data = {username, password};
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    // const token = this.getToken();
-    // console.log('Authorization: ', `Bearer ${token}`);
-
-    return this.http.post<Token>(`${this.apiUrl}login/`, data, httpOptions).pipe(
-      tap((response: Token) => {
-        localStorage.setItem(this.TOKEN_KEY, response.access);
-      })
-    );
-  }
+  // login(username: string, password: string): Observable<Token> {
+  //   const data = {username, password};
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     })
+  //   };
+  //   // const token = this.getToken();
+  //   // console.log('Authorization: ', `Bearer ${token}`);
+  //
+  //   return this.http.post<Token>(`${this.apiUrl}login/`, data, httpOptions).pipe(
+  //     tap((response: Token) => {
+  //       localStorage.setItem(this.TOKEN_KEY, response.access);
+  //     })
+  //   );
+  // }
 
   getCurrentUser(): Observable<User> {
     const headers = new HttpHeaders({
@@ -44,9 +44,7 @@ export class AuthService {
     return this.http.get<User>(`${this.apiUrl}`, {headers});
   }
 
-  logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-  }
+
 
   isAuthenticated(): boolean {
     return localStorage.getItem(this.TOKEN_KEY) !== null;

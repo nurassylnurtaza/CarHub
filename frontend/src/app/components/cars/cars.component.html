@@ -1,18 +1,15 @@
-
-
-
 <div class="recipe-filter">
-<!--  <button class="btn" (click)="getAllCars()">All Recipes</button>-->
-<!--  <button class="btn" *ngFor="let category of categories" (click)="onCategoryClick(category.id)">{{category.name}}</button>-->
+  <button class="btn" (click)="getAllCars()">All Cars</button>
+  <button class="btn" *ngFor="let category of categories" (click)="onCategoryClick(category.id)">{{category.name}}</button>
 </div>
 
 
 <div class="cars-list">
   <div *ngFor="let car of cars" class="recipe-card">
 
-    <img [src]="car.imgURL" alt="Recipe Image">
+    <img [src]="car.imgURL" alt="Car Image">
 
     <h3>{{ car.brand }} {{car.model}}</h3>
-    <a class="btn recipe-card-btn" [routerLink]="['/detail', car.id]">View Car</a>
+    <a class="btn recipe-card-btn" [routerLink]="['/cars', car.id]">View Car</a>
   </div>
 </div>

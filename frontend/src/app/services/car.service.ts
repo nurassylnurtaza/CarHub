@@ -24,7 +24,7 @@ export class CarService {
       Authorization: `Bearer ${this.authService.getToken()}`
     });
 
-    return this.http.get<Category[]>(`${this.apiUrl}/categories/`, {headers});
+    return this.http.get<Category[]>(`${this.apiUrl}/category/`, {headers});
   }
   getAllCars(): Observable<Car[]> {
     const headers = new HttpHeaders({

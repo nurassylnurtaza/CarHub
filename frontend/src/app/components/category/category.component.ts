@@ -15,7 +15,7 @@ import {Cars} from "../../fake_db";
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
-export class CategoryComponent {
+export class CategoryComponent implements OnInit{
   Cars: Car[] = [
     {
       id:  1,
@@ -34,19 +34,19 @@ export class CategoryComponent {
 
 constructor(private carService: CarService, private route: ActivatedRoute) { }
   categoryId: number = 0;
-  // ngOnInit() {
-  //   const categoryIdString = this.route.snapshot.paramMap.get('id');
-  //   this.categoryId = categoryIdString ? + categoryIdString : 0;
-  //   this.getCarsForCategory();
-  // }
-  // getCarsForCategory(): void{
-  //   this.carService.getCarsByCategory(this.categoryId).subscribe(
-  //     cars => {
-  //       this.cars = cars;
-  //     },
-  //     error => {
-  //       console.error('Failed to get Cars: ', error);
-  //     }
-  //   )
-  // }
+  ngOnInit() {
+    const categoryIdString = this.route.snapshot.paramMap.get('id');
+    this.categoryId = categoryIdString ? + categoryIdString : 0;
+    this.getCarsForCategory();
+  }
+  getCarsForCategory(): void{
+    this.carService.getCarsByCategory(this.categoryId).subscribe(
+      cars => {
+        this.Cars = cars;
+      },
+      error => {
+        console.error('Failed to get Cars: ', error);
+      }
+    )
+  }
 }
