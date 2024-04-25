@@ -28,9 +28,9 @@ export class DealersComponent implements OnInit{
     })
   }
   getDealer(id: number) {
-    this.dealerService.getDealer(id).subscribe((dealer: Dealer) => {
-      this.
-    })
+    // this.dealerService.getDealer(id).subscribe((dealer: Dealer) => {
+    //
+    // })
   }
   getDealerCars(dealer: Dealer){
     this.dealerService.getDealerCars(dealer.id).subscribe((data)=>{
