@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {Car, Category} from "../../models";
 import {User} from "../../User";
+import {CarService} from "../../services/car.service";
 
 @Component({
   selector: 'app-fav',
@@ -15,26 +16,25 @@ import {User} from "../../User";
   templateUrl: './fav.component.html',
   styleUrl: './fav.component.css'
 })
-export class FavComponent {
+export class FavComponent implements OnInit{
   Category!: Category;
   User!: User;
-  cars: Car[] = [
-    {
-      id:  1,
-      model: `model ${1}`,
-      brand:`brand ${ 1}`,
-      year: 1952,
-      color: 'black',
-      category: this.Category,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consectetur consequatur, eaque',
-      price: 150000,
-      imgURL: '',
-      liked: true,
-      user: this.User
-    },
-  ];
+  cars: Car[] = [];
+  constructor(private carService: CarService){
+    this.cars = [];
+  }
   like(car: Car): void{
     car.liked = !car.liked
+    this.carService.likeAction(car);
+  }
+  ngOnInit(): void {
+    this.getFavoriteCars()
+  }
+  getFavoriteCars(){
+    this.carService.getFavoriteCarsOfUser().subscribe((cars) => {
+      this.cars = cars;
+      console.log(this.cars)
+    });
   }
 
 }

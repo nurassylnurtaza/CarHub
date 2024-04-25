@@ -8,6 +8,8 @@ import {AccountComponent} from "./components/account/account.component";
 import {CategoryComponent} from "./components/category/category.component";
 import {DealersComponent} from "./components/dealers/dealers.component";
 import {FavComponent} from "./components/fav/fav.component";
+import {MyCarsComponent} from "./components/my-cars/my-cars.component";
+import {AddCarsComponent} from "./components/add-cars/add-cars.component";
 export const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'sign-in', component: SignInComponent},
@@ -15,8 +17,10 @@ export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'cars' , component: CarsComponent},
   {path: 'account' ,component: AccountComponent},
-  {path: 'category', component: CategoryComponent},
+  {path: 'categories', component: CategoryComponent},
   {path: 'cars/:id ' , component: CarDetailsComponent},
   {path: 'dealers', component: DealersComponent},
-  {path: 'fav', component: FavComponent}
+  {path: 'fav', component: FavComponent},
+  {path: 'my-cars', component: MyCarsComponent},
+  {path: 'add-cars', component: AddCarsComponent}
 ];

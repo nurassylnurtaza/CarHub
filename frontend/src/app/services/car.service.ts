@@ -12,6 +12,11 @@ export class CarService {
   private apiUrl = "http://localhost:8000/home";
 
   constructor ( private http: HttpClient, private authService: AuthService) { }
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Authorization': 'JWT ' + localStorage.getItem('token')
+    })
+  };
   getCars(): Observable<Car[]> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.authService.getToken()}`
@@ -49,4 +54,21 @@ export class CarService {
     const url = `${this.apiUrl}/cars/${id}/`;
     return this.http.get<Car>(url, { headers });
   }
+  getFavoriteCarsOfUser(): Observable<Car[]>{
+    return this.http.get<Car[]>(`${this.apiUrl}/favorites/`, this.httpOptions)
+  }
+  likeAction(car: Car){
+    this.http.post(`${this.apiUrl}/favorites/`, {car: car.id}, this.httpOptions).subscribe(resp=>{
+    }, error => {
+    })
+  }
+
+  getMyRecipes(): Observable<Recipe[]> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.authService.getToken()}`
+    });
+
+    return this.http.get<Recipe[]>(`${this.apiUrl}/my-recipes/`, {headers});
+  }
+
 }
