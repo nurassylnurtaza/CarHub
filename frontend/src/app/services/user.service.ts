@@ -7,6 +7,6 @@ import {AuthService} from "./auth.service";
   providedIn: 'root'
 })
 export class UserService {
-  profileUrl = 'http://localhost:8000/profile/';
+  profileUrl = 'http://localhost:8000//';
 
 }

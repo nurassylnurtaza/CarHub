@@ -23,10 +23,12 @@ export class CarDetailsComponent {
     car.liked = !car.liked
   }
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.carService.getCarsById(id).subscribe((car) => {
-      this.car = car;
-    });
+    this.route.paramMap.subscribe((params)=>{
+      const id = Number(params.get('id'))
+      this.carService.getCarsById(id).subscribe((car) =>{
+        this.car = car;
+      })
+    })
 
   }
 

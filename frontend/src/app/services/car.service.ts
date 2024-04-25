@@ -2,73 +2,79 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Car, Category} from "../models";
 import {AuthService} from "./auth.service";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
+import {User} from "../User";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
 
-  private apiUrl = "http://localhost:8000/home";
+  private apiUrl = "http://localhost:8000/cars/";
 
   constructor ( private http: HttpClient, private authService: AuthService) { }
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Authorization': 'JWT ' + localStorage.getItem('token')
-    })
-  };
-  getCars(): Observable<Car[]> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authService.getToken()}`
-    });
 
-    return this.http.get<Car[]>(`${this.apiUrl}/cars/`, {headers});
+  getCars(): Observable<Car[]> {
+    return this.http.get<Car[]>(`${this.apiUrl}`);
   }
   getCategories(): Observable<Category[]> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authService.getToken()}`
-    });
-
-    return this.http.get<Category[]>(`${this.apiUrl}/category/`, {headers});
+    return this.http.get<Category[]>(`${this.apiUrl}/category/`);
   }
   getAllCars(): Observable<Car[]> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authService.getToken()}`
-    });
-
-    return this.http.get<Car[]>(`${this.apiUrl}/cars/`, {headers});
+    return this.http.get<Car[]>(`${this.apiUrl}cars`);
   }
   getCarsByCategory(categoryId: number): Observable<Car[]> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authService.getToken()}`
-    });
+
     // const url = 'http://localhost:8000/category/?category=${categoryId}'
-    return this.http.get<Car[]>(`${this.apiUrl}/category/${categoryId}`, {headers});
+    return this.http.get<Car[]>(`${this.apiUrl}/category/${categoryId}`);
     // return this.http.get<Recipe[]>(url, {headers});
   }
   getCarsById(id: number): Observable<Car> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.authService.getToken()}`
-    });
-
-    const url = `${this.apiUrl}/cars/${id}/`;
-    return this.http.get<Car>(url, { headers });
+    const url = `${this.apiUrl}/${id}/`;
+    return this.http.get<Car>(url);
   }
   getFavoriteCarsOfUser(): Observable<Car[]>{
-    return this.http.get<Car[]>(`${this.apiUrl}/favorites/`, this.httpOptions)
+    return this.http.get<Car[]>(`${this.apiUrl}favorites/`)
   }
   likeAction(car: Car){
-    this.http.post(`${this.apiUrl}/favorites/`, {car: car.id}, this.httpOptions).subscribe(resp=>{
+    this.http.post(`${this.apiUrl}favorites/`, {car: car.id}).subscribe(resp=>{
     }, error => {
     })
   }
 
-  getMyRecipes(): Observable<Recipe[]> {
+  getMyCars(): Observable<Car[]> {
+    return this.http.get<Car[]>(`${this.apiUrl}my`);
+  }
+  deleteCar(id: number | null): Observable<Car> {
+
+    if(id == null)
+      return of();
+
+    const url = `${this.apiUrl}my${id}`;
+    return this.http.delete<Car>(url);
+  }
+  addCar(car: Car) {
+    const payload = {
+      brand: car.brand,
+      model: car.model,
+      categories: car.category,
+      description: car.description,
+      year: car.year,
+      color: car.color,
+      price: car.price,
+      image: car.image,
+      liked: car.liked,
+      user: car.user
+    };
     const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${this.authService.getToken()}`
     });
 
-    return this.http.get<Recipe[]>(`${this.apiUrl}/my-recipes/`, {headers});
-  }
-
+    return this.http.post<Car>(`${this.apiUrl}/cars/`, JSON.stringify(payload), {
+      headers,
+      reportProgress: true,
+      observe: 'events'
+    });
+}
 }

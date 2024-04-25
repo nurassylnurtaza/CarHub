@@ -1,1 +1,27 @@
-<p>my-cars works!</p>
+<div class="my-recipes">
+  <h2 class="page-title">Мои машины</h2>
+  <div>
+    <button class="button"><a routerLink="/add-cars">Добавить машину</a></button>
+  </div>
+  <div class="recipes-list">
+    <div class="recipe-card" *ngFor="let car of cars">
+      <div class="recipe-image">
+        <img [src]="car.image" alt="{{ car.brand }} {{car.model}}">
+      </div>
+      <div class="recipe-details">
+        <h3 class="recipe-title">{{ car.brand}} {{car.model}}</h3>
+        <div class="recipe-category">{{ car.category }}</div>
+        <p class="recipe-description">{{ car.description }}</p>
+
+        <div class="recipe-actions">
+          <button class = "del" (click)="car && car.id && deleteCar(car.id)">Удалить</button>
+        </div>
+
+        <a [routerLink]="['/cars', car.id]">View Car</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

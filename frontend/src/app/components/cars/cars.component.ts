@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {Car, Category} from "../../models";
 import {CarService} from "../../services/car.service";
 import {Router, RouterLink} from "@angular/router";
@@ -11,7 +11,8 @@ import {User} from "../../User";
   standalone: true,
   imports: [
     NgForOf,
-    RouterLink
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './cars.component.html',
   styleUrl: './cars.component.css'
@@ -43,7 +44,7 @@ export class CarsComponent implements OnInit{
   }
   router: Router;
   onCategoryClick(categoryId: number): void {
-    this.router.navigate(['/category', categoryId]);
+    this.router.navigate(['/categories', categoryId]);
   }
   getAllCars(): void {
     this.carService.getAllCars().subscribe(
@@ -55,5 +56,6 @@ export class CarsComponent implements OnInit{
       }
     )
   }
+
 
 }

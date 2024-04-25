@@ -10,6 +10,7 @@ import {DealersComponent} from "./components/dealers/dealers.component";
 import {FavComponent} from "./components/fav/fav.component";
 import {MyCarsComponent} from "./components/my-cars/my-cars.component";
 import {AddCarsComponent} from "./components/add-cars/add-cars.component";
+import {DealerItemComponent} from "./components/dealer-item/dealer-item.component";
 export const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'sign-in', component: SignInComponent},
@@ -20,7 +21,8 @@ export const routes: Routes = [
   {path: 'categories', component: CategoryComponent},
   {path: 'cars/:id ' , component: CarDetailsComponent},
   {path: 'dealers', component: DealersComponent},
-  {path: 'fav', component: FavComponent},
+  {path: 'dealers/:id', component: DealerItemComponent},
+  {path: 'favorites', component: FavComponent},
   {path: 'my-cars', component: MyCarsComponent},
   {path: 'add-cars', component: AddCarsComponent}
 ];

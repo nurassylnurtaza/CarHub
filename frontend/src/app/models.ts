@@ -11,12 +11,12 @@ export interface Car{
   model: string,
   year: number,
   color: string,
-  category: Category,
+  category: Category[],
   description: string,
   price: number,
-  imgURL: string,
+  image: string,
   liked: boolean,
-  user: User
+  user: User[]
 }
 
 

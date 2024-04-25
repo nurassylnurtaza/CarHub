@@ -9,7 +9,7 @@
 
   <a *ngIf="!authService.isAuthenticated()" routerLink="/account" style="float: right"><img src="assets/bxs-user-account.svg"></a>
 
-  <a *ngIf="!authService.isAuthenticated()" routerLink="/fav" style="float: right"><img src="assets/bxs-heart.svg"></a>
+  <a *ngIf="!authService.isAuthenticated()" routerLink="/favorites" style="float: right"><img src="assets/bxs-heart.svg"></a>
 
   <a *ngIf="authService.isAuthenticated()" routerLink="/sign-up" style="float:right">Sign up</a>
 <!--  <p>or</p>-->

@@ -8,7 +8,7 @@
 <div class="cars-list">
   <div *ngFor="let car of cars" class="recipe-card">
 
-    <img [src]="car.imgURL" alt="Car Image">
+    <img src="{{car.image}}" alt="Car Image">
 
     <h3>{{ car.brand }} {{car.model}}</h3>
     <a class="btn recipe-card-btn" [routerLink]="['/cars', car.id]">View Car</a>

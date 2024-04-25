@@ -13,7 +13,7 @@ export class DealerService {
     return this.client.get<Dealer[]>(`${this.BASE_URL}`)
   }
   getDealer(id: number): Observable<Dealer> {
-    return this.client.get<Dealer>(`${this.BASE_URL}/${id}/`)
+    return this.client.get<Dealer>(`${this.BASE_URL}${id}/`)
   }
   getDealerCars(id: number): Observable<DealerCar[]> {
     return this.client.get<DealerCar[]>(`${this.BASE_URL}/${id}/cars/`)

@@ -19,6 +19,7 @@ import { User } from '../../User';
 export class CategoryComponent implements OnInit{
   Cars: Car[] = [ ];
 
+  Categories!: Category[];
 
 constructor(private carService: CarService, private route: ActivatedRoute) { }
   categoryId: number = 0;
