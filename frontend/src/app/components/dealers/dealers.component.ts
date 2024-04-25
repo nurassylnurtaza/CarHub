@@ -1,12 +1,41 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Dealer, DealerCar} from "../../models";
+import {DealerService} from "../../services/dealer.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-dealers',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink
+  ],
   templateUrl: './dealers.component.html',
   styleUrl: './dealers.component.css'
 })
-export class DealersComponent {
+export class DealersComponent implements OnInit{
+  dealers!: Dealer[];
+  dealerCars!: DealerCar[];
+  constructor(private dealerService: DealerService) {
+    this.dealers = [];
+    this.dealerCars =[]
+  }
+
+
+
+  ngOnInit(): void {
+    this.dealerService.getDealers().subscribe((dealers: Dealer[]) => {
+      this.dealers = dealers
+    })
+  }
+  getDealer(id: number) {
+    this.dealerService.getDealer(id).subscribe((dealer: Dealer) => {
+      this.
+    })
+  }
+  getDealerCars(dealer: Dealer){
+    this.dealerService.getDealerCars(dealer.id).subscribe((data)=>{
+      this.dealerCars = data;
+    })
+}
 
 }

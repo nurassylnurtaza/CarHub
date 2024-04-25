@@ -27,7 +27,19 @@ export interface Dealer {
   id: number,
   img: string,
   name: string,
-  dealerCars: Car[]
+  phone_number:string;
+}
+export interface DealerCar{
+  id: number,
+  brand: string;
+  model: string;
+  year: number;
+  color: string;
+  description: string;
+  price: number;
+  imgURL: string;
+  liked: boolean;
+  dealer: Dealer;
 }
 
 
