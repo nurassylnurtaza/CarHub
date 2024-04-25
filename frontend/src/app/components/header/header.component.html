@@ -1,20 +1,17 @@
 <div class="top-bar">
   <a routerLink="/">Car Hub</a>
 
-<!--  <a *ngIf="authService.isAuthenticated()" routerLink="/my-recipes">My recipes</a>-->
-
-<!--  <a routerLink="/recipes">Find recipes</a>-->
-
-<!--  <a routerLink="/about-us">About us</a>-->
-
 <!--    <button *ngIf="authService.isAuthenticated()" (click)="logout()">Log out</button>-->
   <a  routerLink="/cars" >Cars</a>
 
+  <a  routerLink="/dealers" >Dealers</a>
 
-  <a *ngIf="!authService.isAuthenticated()" routerLink="/account" style="float: right">Account</a>
+
+  <a *ngIf="!authService.isAuthenticated()" routerLink="/account" style="float: right"><img src="assets/bxs-user-account.svg"></a>
+  <a *ngIf="!authService.isAuthenticated()" routerLink="/fav" style="float: right"><img src="assets/bxs-heart.svg"></a>
 
   <a *ngIf="authService.isAuthenticated()" routerLink="/sign-up" style="float:right">Sign up</a>
-
+<!--  <p>or</p>-->
   <a *ngIf="authService.isAuthenticated()" routerLink="/sign-in" style="float:right">Sign in</a>
-
 </div>
+

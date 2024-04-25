@@ -5,8 +5,9 @@ import {HomeComponent} from "./components/home/home.component";
 import {CarsComponent} from "./components/cars/cars.component";
 import {CarDetailsComponent} from "./components/car-details/car-details.component";
 import {AccountComponent} from "./components/account/account.component";
-import {CategoryService} from "./services/category.service";
 import {CategoryComponent} from "./components/category/category.component";
+import {DealersComponent} from "./components/dealers/dealers.component";
+import {FavComponent} from "./components/fav/fav.component";
 export const routes: Routes = [
   {path: 'home', component:HomeComponent},
   {path: 'sign-in', component: SignInComponent},
@@ -15,5 +16,7 @@ export const routes: Routes = [
   {path: 'cars' , component: CarsComponent},
   {path: 'account' ,component: AccountComponent},
   {path: 'category', component: CategoryComponent},
-  {path: 'cars/:id ' , component: CarDetailsComponent}
+  {path: 'cars/:id ' , component: CarDetailsComponent},
+  {path: 'dealers', component: DealersComponent},
+  {path: 'fav', component: FavComponent}
 ];

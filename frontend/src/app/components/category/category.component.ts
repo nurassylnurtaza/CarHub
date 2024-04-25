@@ -4,7 +4,8 @@ import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {CategoryService} from "../../services/category.service";
 import {CarService} from "../../services/car.service";
 import {NgForOf} from "@angular/common";
-import {Cars} from "../../fake_db";
+import {Category} from "../../models";
+import { User } from '../../User';
 
 @Component({
   selector: 'app-category',
@@ -16,20 +17,7 @@ import {Cars} from "../../fake_db";
   styleUrl: './category.component.css'
 })
 export class CategoryComponent implements OnInit{
-  Cars: Car[] = [
-    {
-      id:  1,
-      model: `model ${1}`,
-      brand:`brand ${ 1}`,
-      year: 1952,
-      color: 'black',
-      category: 1,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consectetur consequatur, eaque',
-      price: 150000,
-      imgURL: '',
-      liked: true
-    }
-  ];
+  Cars: Car[] = [ ];
 
 
 constructor(private carService: CarService, private route: ActivatedRoute) { }

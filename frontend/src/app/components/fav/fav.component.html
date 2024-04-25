@@ -1,1 +1,11 @@
-<p>fav works!</p>
+
+<div class="container" *ngFor="let car of cars">
+  <div *ngIf="car.liked" class="recipe-card">
+
+        <img [src]="car.imgURL" alt="Car Image">
+
+    <h3>{{ car.brand }} {{car.model}}</h3>
+    <a class="btn recipe-card-btn" [routerLink]="['/cars', car.id]">View Car</a>
+    <button class="" (click)="like(car)"><img src="assets/bxs-heart.svg"></button>
+  </div>
+</div>

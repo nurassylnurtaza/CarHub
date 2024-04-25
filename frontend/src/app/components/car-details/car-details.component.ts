@@ -1,32 +1,34 @@
 import {Component, OnInit} from '@angular/core';
-import {Car} from "../../models";
-import {ActivatedRoute} from "@angular/router";
+import {Car, Category} from "../../models";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {CarService} from "../../services/car.service";
+import {NgIf} from "@angular/common";
+import { User } from '../../User';
 
 @Component({
   selector: 'app-car-details',
   standalone: true,
-  imports: [],
+  imports: [
+    NgIf,
+    RouterLink
+  ],
   templateUrl: './car-details.component.html',
   styleUrl: './car-details.component.css'
 })
 export class CarDetailsComponent {
-  car: Car;
-  car_id: number;
+  car!: Car;
   constructor(private route: ActivatedRoute, private carService: CarService) {
-    this.car_id = 0;
-    this.car =
-      {id: 0,
-        model: 'null',
-        brand: 'null',
-        description:'null',
-        year: 0,
-        color: 'null',
-        category: 0,
-        price:0,
-        imgURL: 'null',
-        liked: false
-      };
-  };
+  }
+  like(car: Car): void{
+    car.liked = !car.liked
+  }
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.carService.getCarsById(id).subscribe((car) => {
+      this.car = car;
+    });
+
+  }
+
 
 }

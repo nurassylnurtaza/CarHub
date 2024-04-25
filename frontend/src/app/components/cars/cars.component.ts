@@ -4,6 +4,7 @@ import {NgForOf} from "@angular/common";
 import {Car, Category} from "../../models";
 import {CarService} from "../../services/car.service";
 import {Router, RouterLink} from "@angular/router";
+import {User} from "../../User";
 
 @Component({
   selector: 'app-cars',
@@ -16,32 +17,11 @@ import {Router, RouterLink} from "@angular/router";
   styleUrl: './cars.component.css'
 })
 export class CarsComponent implements OnInit{
-  cars: Car[] = [
-    {
-      id:  1,
-      model: `model ${1}`,
-      brand:`brand ${ 1}`,
-      year: 1952,
-      color: 'black',
-      category: 1,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consectetur consequatur, eaque',
-      price: 150000,
-      imgURL: '',
-      liked: true
-    },
-  ];
-  categories: Category[] = [
-    {
-      id: 1,
-      name: "SUV"
-    },
-    {
-      id: 2,
-      name: "sedan"
-    }
-  ];
+  cars: Car[] = [];
+  categories: Category[] = [];
 
   constructor(private carService: CarService, private route: Router) {
+    this.router = route;
   }
 
   ngOnInit() {
@@ -61,9 +41,9 @@ export class CarsComponent implements OnInit{
       }
     )
   }
-
+  router: Router;
   onCategoryClick(categoryId: number): void {
-    this.route.navigate(['/category', categoryId]);
+    this.router.navigate(['/category', categoryId]);
   }
   getAllCars(): void {
     this.carService.getAllCars().subscribe(
@@ -71,8 +51,9 @@ export class CarsComponent implements OnInit{
         this.cars = recipes;
       },
       error => {
-        console.error('Failed to get all recipes: ', error);
+        console.error('Failed to get all cars: ', error);
       }
     )
   }
+
 }

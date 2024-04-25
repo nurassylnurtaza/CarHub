@@ -1,14 +1,12 @@
-<div>
-  <div class="photo">
-    <img src="{{car.imgURL}}">
+<div class="container">
+  <div *ngIf="car.liked" class="recipe-card">
+
+    <img [src]="car.imgURL" alt="Car Image">
+
+    <h3>{{ car.brand }} {{car.model}}</h3>
+    <h4>{{car.category}}</h4>
+    <p>{{car.description}}</p>
+    <button class="" (click)="like(car)"><img src="assets/bxs-heart.svg"></button>
   </div>
-  <div class="information">
-    <h1 class="name">{{car.brand}} {{car.model}}</h1>
-    <h2 class="price"> {{car.price}}</h2>
-    <img src="" class="like">
-    <div class="desc">
-      <h3>{{car.category}}</h3>
-      <p>{{car.description}}</p>
-    </div>
-  </div>
+
 </div>

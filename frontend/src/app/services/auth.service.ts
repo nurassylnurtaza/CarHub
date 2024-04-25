@@ -7,7 +7,7 @@ import {Token} from "../Token"
   providedIn: 'root'
 })
 export class AuthService {
-
+  //
   private readonly TOKEN_KEY = 'myapp-token';
   private apiUrl = 'http://localhost:8000/account/';
 
@@ -18,22 +18,22 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  // login(username: string, password: string): Observable<Token> {
-  //   const data = {username, password};
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/json'
-  //     })
-  //   };
-  //   // const token = this.getToken();
-  //   // console.log('Authorization: ', `Bearer ${token}`);
-  //
-  //   return this.http.post<Token>(`${this.apiUrl}login/`, data, httpOptions).pipe(
-  //     tap((response: Token) => {
-  //       localStorage.setItem(this.TOKEN_KEY, response.access);
-  //     })
-  //   );
-  // }
+  login(username: string, password: string): Observable<Token> {
+    const data = {username, password};
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    const token = this.getToken();
+    console.log('Authorization: ', `Bearer ${token}`);
+
+    return this.http.post<Token>(`${this.apiUrl}login/`, data, httpOptions).pipe(
+      tap((response: Token) => {
+        localStorage.setItem(this.TOKEN_KEY, response.access);
+      })
+    );
+  }
 
   getCurrentUser(): Observable<User> {
     const headers = new HttpHeaders({

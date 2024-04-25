@@ -15,4 +15,23 @@ import {RegisterService} from "../../services/register.service";
 export class SignUpComponent {
   username = '';
   password = '';
+
+  router: Router;
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
+  constructor(private registrationService: RegisterService, router: Router) {
+    this.router = router;
+  }
+
+  onSubmit() {
+    this.registrationService.registerUser(this.username, this.password).subscribe(
+      (response) => {
+        this.navigateTo('/sign-in');
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
 }
